@@ -28,6 +28,9 @@ git status
 # show which branch you are currently on
 git branch
 
+# create new branch to work in
+git checkout <new branch>
+
 # change branch to update
 git checkout <branch>
 
