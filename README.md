@@ -37,6 +37,3 @@ git show
 # remove cached files:
 git rm --cached -r .
 ```
-
-# Test Fetch
-This section is setup to test the remove status and fetch functionality
