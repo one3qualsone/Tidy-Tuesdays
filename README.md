@@ -29,7 +29,7 @@ git status
 git branch
 
 # create new branch to work in
-git checkout <new branch>
+git branch <new branch>
 
 # change branch to update
 git checkout <branch>
