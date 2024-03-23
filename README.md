@@ -37,4 +37,14 @@ git show
 # remove cached files:
 git rm --cached -r .
 ```
-# made change
+# Revert to old version
+```
+# Show version history
+git log --oneline
+
+# reset to set commit
+git reset --hard <commit-sha>
+
+# force the main branch to revert
+git push origin main --force
+```
