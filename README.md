@@ -51,3 +51,21 @@ git reset --hard <commit-sha>
 # force the main branch to revert
 git push origin main --force
 ```
+
+
+# Add feature to main branch
+```
+# Switch to main from your feature branch
+git checkout main
+
+# make sure local main is up to date
+git pull origin main
+
+# merge feature into main
+git merge week1
+
+```
+# Remove branch
+```
+git branch -d <branch name>
+```
