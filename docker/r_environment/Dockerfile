@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the R package list into the Docker image
-COPY requirements.R /tmp/requirements.R
+COPY requirements.r /tmp/requirements.r
 
 # Install R packages from the requirements file
-RUN Rscript /tmp/requirements.R
+RUN Rscript /tmp/requirements.r
 
 # Set the working directory
 WORKDIR /usr/src/app
