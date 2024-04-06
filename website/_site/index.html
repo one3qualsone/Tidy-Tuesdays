@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,9 +70,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="resources/styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -110,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Basics</a></li><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -131,45 +132,51 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Basics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Tidy Tuesdays</span></span>
+  </li>
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Home</span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
- <span class="menu-text">basics-knitr.qmd</span>
-  </li>
-          <li class="sidebar-item">
- <span class="menu-text">basics-jupyter.qmd</span>
-  </li>
-      </ul>
-  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Layout</span></a>
+ <span class="menu-text">Weekly Projects</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Week 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
- <span class="menu-text">layout.qmd</span>
+ <span class="menu-text">One</span>
   </li>
-          <li class="sidebar-item">
- <span class="menu-text">layout-knitr.qmd</span>
+      </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Week 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
- <span class="menu-text">layout-jupyter.qmd</span>
+ <span class="menu-text">Two</span>
+  </li>
+      </ul>
   </li>
       </ul>
   </li>
@@ -179,12 +186,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#navigating-our-site-is-simple" id="toc-navigating-our-site-is-simple" class="nav-link active" data-scroll-target="#navigating-our-site-is-simple">Navigating our site is simple:</a></li>
+  <li><a href="#accessing-the-content" id="toc-accessing-the-content" class="nav-link" data-scroll-target="#accessing-the-content">Accessing the Content</a></li>
+  <li><a href="#tidy-tuesday-github-repository" id="toc-tidy-tuesday-github-repository" class="nav-link" data-scroll-target="#tidy-tuesday-github-repository">Tidy Tuesday GitHub Repository</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Basics</a></li><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Home</h1>
 </div>
@@ -206,17 +221,20 @@ ul.task-list li input[type="checkbox"] {
 <p>Introduction</p>
 <p>Welcome to our interactive platform where we dive into the world of data analysis and visualization, one dataset at a time. Every week, we take on a new challenge from the Tidy Tuesday initiative, exploring datasets with a fresh perspective and sharing our insights and findings here.</p>
 <p>Our goal is to make data analysis approachable and engaging, whether you’re a seasoned data scientist or just starting out. Through this site, we aim to share the beauty of data storytelling, using both R and Python to uncover stories hidden within numbers. Getting Started</p>
-<p>Navigating our site is simple:</p>
-<pre><code>Home Page: Start here for the latest updates and an overview of what Tidy Tuesday is all about.
-Weekly Challenges: Dive into each week's challenge through the navigation menu. Here, you'll find our analyses, visualizations, and a summary of our findings for each dataset we explore.
-Interactive Visualizations: Engage with our dynamic visualizations, crafted to make data exploration intuitive and enlightening.
-Learn &amp; Explore: Access tutorials, code snippets, and resources that we've used or found helpful in our data analysis journey.</code></pre>
-<p>Accessing the Content</p>
+<section id="navigating-our-site-is-simple" class="level3">
+<h3 class="anchored" data-anchor-id="navigating-our-site-is-simple">Navigating our site is simple:</h3>
+<p>Home Page: Start here for the latest updates and an overview of what Tidy Tuesday is all about. Weekly Challenges: Dive into each week’s challenge through the navigation menu. Here, you’ll find our analyses, visualizations, and a summary of our findings for each dataset we explore. Interactive Visualizations: Engage with our dynamic visualizations, crafted to make data exploration intuitive and enlightening. Learn &amp; Explore: Access tutorials, code snippets, and resources that we’ve used or found helpful in our data analysis journey.</p>
+</section>
+<section id="accessing-the-content" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-the-content">Accessing the Content</h3>
 <p>For those interested in the raw code, datasets, and more detailed breakdowns of our analyses, we’ve got you covered. All our content is openly available on our GitHub repository:</p>
-<pre><code>Tidy Tuesday GitHub Repository</code></pre>
+</section>
+<section id="tidy-tuesday-github-repository" class="level3">
+<h3 class="anchored" data-anchor-id="tidy-tuesday-github-repository">Tidy Tuesday GitHub Repository</h3>
 <p>Within the repository, navigate to the weekly_projects directory to find R files, datasets, and additional resources for each weekly challenge. Feel free to clone the repository, explore the analyses, and even contribute your insights.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
