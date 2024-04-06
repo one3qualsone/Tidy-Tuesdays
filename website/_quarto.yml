@@ -1,0 +1,44 @@
+project:
+  type: website
+
+website:
+  title: "Tidy Tuesdays"
+  image: "cover_small.jpg"
+  navbar:
+    tools:
+      - icon: twitter
+        href: https://twitter.com
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://code.com
+          - text: Report a Bug
+            url:  https://bugs.com
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Basics"
+        contents:
+          - index.qmd
+          - basics-knitr.qmd
+          - basics-jupyter.qmd
+      - section: "Layout"
+        contents:
+          - layout.qmd
+          - layout-knitr.qmd
+          - layout-jupyter.qmd
+    page-footer:
+    left: |
+      Proudly supported by
+      [![](https://www.rstudio.com/assets/img/posit-logo-fullcolor-TM.svg){fig-alt="Posit" width=65px}](https://posit.co)
+
+format:
+  html: 
+    page-layout: article # doesn't seem to do much
+    theme:
+      light: cosmo 
+      dark: cosmo
+    code-copy: true
+    code-overflow: wrap
+    toc: true

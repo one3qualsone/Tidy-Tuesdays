@@ -3,7 +3,7 @@ name: Deploy Shiny Apps
 on:
   push:
     paths:
-      - 'weekly_challenges/**/*_shiny/**'
+      - 'weekly_challenges/week*_shiny/app.r'
       - 'Dockerfile'  # If your Shiny Dockerfile might change
 
 jobs:

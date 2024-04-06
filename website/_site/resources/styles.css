@@ -1,0 +1,7 @@
+.content {
+    max-width: 900px; /* Adjust based on your content width preference */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Adds some padding around the content */
+  }
+  

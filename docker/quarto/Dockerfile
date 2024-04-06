@@ -1,26 +1,29 @@
-# Start with the Rocker R base image
-FROM rocker/r-ver:4.1.0
+FROM ubuntu:latest
 
-# Install system dependencies for Quarto
+# Install dependencies
 RUN apt-get update && apt-get install -y \
-    pandoc \
-    pandoc-citeproc \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
-    libssl-dev \
-    libssh2-1-dev \
-    libpq-dev \
+    curl \
+    wget \
+    dpkg \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Quarto
-RUN wget -qO- "https://github.com/quarto-dev/quarto-cli/releases/download/v0.9.534/quarto-0.9.534-linux-amd64.deb" > quarto.deb && \
-    dpkg -i quarto.deb && \
-    rm quarto.deb
+# Fetch the latest Quarto release URL, download and install it
+RUN curl -s https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest \
+    | grep "browser_download_url.*linux-amd64.deb" \
+    | cut -d '"' -f 4 \
+    | wget -qi - \
+    && dpkg -i quarto*.deb \
+    && rm quarto*.deb
 
-# Set the working directory to where the Quarto projects will be mounted
-WORKDIR /quarto-projects
+# Expose the default Quarto serve port
+EXPOSE 4000
 
-# The default command can still be to render a Quarto project, but you may need to
-# make this more dynamic depending on your projects
-CMD ["quarto", "render", "your-quarto-project.qmd"]
+# Copy your Quarto project files into the container
+# Ensure you have a directory named 'your-quarto-project' in your context
+COPY website/ /quarto-project
+
+# Set the working directory to where your Quarto project is
+WORKDIR /quarto-project
+
+# Start the Quarto server
+CMD ["quarto", "preview", "--host", "0.0.0.0", "--port", "4000"]
