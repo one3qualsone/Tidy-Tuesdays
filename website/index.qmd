@@ -1,9 +1,7 @@
 ---
-title: "Home"
+title: "Introduction"
 
 ---
-
-Introduction
 
 Welcome to our interactive platform where we dive into the world of data analysis and visualization, one dataset at a time. Every week, we take on a new challenge from the Tidy Tuesday initiative, exploring datasets with a fresh perspective and sharing our insights and findings here.
 
@@ -24,3 +22,4 @@ For those interested in the raw code, datasets, and more detailed breakdowns of 
 ### Tidy Tuesday GitHub Repository
 
 Within the repository, navigate to the weekly_projects directory to find R files, datasets, and additional resources for each weekly challenge. Feel free to clone the repository, explore the analyses, and even contribute your insights.
+

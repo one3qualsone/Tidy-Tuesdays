@@ -20,11 +20,7 @@ website:
       - icon: twitter
         href: https://twitter.com
       - icon: github
-        menu:
-          - text: Source Code
-            url:  https://code.com
-          - text: Report a Bug
-            url:  https://bugs.com
+        href: https://github.com/one3qualsone/Tidy-Tuesdays
   sidebar:
     style: "floating"
     search: true
@@ -37,14 +33,11 @@ website:
         text: Introduction
       - section: Weekly Projects
         contents:
-          - section: Week 1
+          - section: '2024'
             contents: 
-              - href: one.qmd
-              - text: One
-          - section: Week 2
-            contents:
-              - href: two.qmd
-              - text: Two
+              - href: ../weekly_challenges/week1/app.qmd
+              - text: Week 1
+
 page-footer:
   center: 
     - text: "About"
