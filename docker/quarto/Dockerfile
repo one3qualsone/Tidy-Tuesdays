@@ -15,13 +15,13 @@ RUN apt-get update && apt-get install -y \
 # Expose the default Quarto serve port
 EXPOSE 4000
 
-# Copy your Quarto project files and weekly challenges into the container
-# Make sure these directories are within your Docker build context
+
 COPY website/ /quarto-project/website
-COPY /weekly_challenges /quarto-project/website/weekly_challenges
+
+COPY weekly_challenges/ /quarto-project/website/weekly_challenges/
 
 # Set the working directory to where your Quarto project is
 WORKDIR /quarto-project
 
 # Start the Quarto server
-CMD ["quarto", "preview", "--host", "0.0.0.0", "--port", "4000"]
+CMD ["sh", "-c", "quarto preview --host 0.0.0.0 --port 4000"]

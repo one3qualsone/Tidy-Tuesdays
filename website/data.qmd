@@ -1,9 +1,0 @@
----
-title: "Data"
-project:
-  type: website
-  output-dir: _site
-
----
-
-Data
