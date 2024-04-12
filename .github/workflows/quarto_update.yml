@@ -1,0 +1,32 @@
+name: Update Quarto Configuration
+
+on:
+  push:
+    paths:
+      - 'weekly_challenges/**'
+      - '.github/scripts/update_quarto.py'  # Trigger also on changes to the script
+
+jobs:
+  update-quarto-config:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install PyYAML
+      run: pip install pyyaml
+
+    - name: Update Quarto Configuration File
+      run: python .github/scripts/update_quarto.py
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git diff --exit-code || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push)
