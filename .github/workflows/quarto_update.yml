@@ -27,6 +27,7 @@ jobs:
 
     - name: Commit and push if changed
       run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
-        git diff --exit-code || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push)
+        git config --global user.email "mj@oneequalsone.uk"
+        git config --global user.name "MJ-OneEqualsOne"
+        git diff --exit-code || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push https://${{ secrets.MJ_ONEEQUALSONE_ACCESSTOKEN }}@github.com/one3qualsone/Tidy-Tuesdays.git HEAD:main)
+    
