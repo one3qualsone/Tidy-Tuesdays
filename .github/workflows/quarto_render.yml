@@ -24,11 +24,17 @@ jobs:
     - name: Render Quarto Documents
       run: |
         cd weekly_challenges
+        mkdir rendered_output  # Create a directory to store rendered files
         for dir in */; do
           if [[ $dir == *"_quarto/" ]]; then
             cd "$dir"
-            quarto render --to html
-            cd ..
+            quarto render --to html --output-dir ../../rendered_output/${dir%_quarto/}
+            cd ../..
           fi
         done
-        # Add commands to deploy rendered HTML files to your server
+
+    - name: Upload Rendered Files as Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: rendered-html
+        path: weekly_challenges/rendered_output/
