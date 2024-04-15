@@ -29,5 +29,5 @@ jobs:
       run: |
         git config --global user.email "admin@oneequalsone.uk"
         git config --global user.name "one3qualsone"
-        git diff --exit-code || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push https://${{ secrets.TIDY_TUESDAYS_TOKEN }}@github.com/one3qualsone/Tidy-Tuesdays.git HEAD:main)
+        git diff --exit-code || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push https://${{ secrets.GITHUB_TOKEN }}@github.com/one3qualsone/Tidy-Tuesdays.git HEAD:main)
     
