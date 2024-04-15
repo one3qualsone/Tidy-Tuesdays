@@ -2,14 +2,15 @@ name: Update Quarto Configuration
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'weekly_challenges/**'
-      - '.github/scripts/update_quarto.py'  # Trigger also on changes to the script
+      - '.github/scripts/update_quarto.py'
 
 jobs:
   update-quarto-config:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -29,5 +30,6 @@ jobs:
       run: |
         git config --global user.email "admin@oneequalsone.uk"
         git config --global user.name "one3qualsone"
-        git diff --exit-code || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push https://${{ secrets.TIDY_TUESDAYS_TOKEN }}@github.com/one3qualsone/Tidy-Tuesdays.git HEAD:main)
-    
+        git diff --quiet --exit-code website/_quarto.yml || (git add website/_quarto.yml && git commit -m "Auto-update Quarto config" && git push origin HEAD:main)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
