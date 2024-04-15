@@ -15,3 +15,8 @@ jobs:
 
     - name: Echo a Message
       run: echo "Hello, GitHub Actions!"
+
+    - name: Check token availability
+      run: echo "Token length ${#GITHUB_TOKEN}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
