@@ -32,8 +32,12 @@ website:
       contents:
       - section: '2024'
         contents:
+        - href: ../weekly_challenges/week1/app.qmd
+          text: Week 1
         - href: ../weekly_challenges/week2/app.qmd
           text: Week 2
+        - href: ../weekly_challenges/week3/app.qmd
+          text: Week 3
 page-footer:
   center:
   - text: About
