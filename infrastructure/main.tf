@@ -11,26 +11,16 @@ provider "azurerm" {
   features {}
 }
 
-# Create resource group
-resource "azurerm_resource_group" "tidy_tuesdays" {
-  name     = "tidy-tuesdays"
-  location = "uksouth"
+# Use data source for existing resource group instead of creating it
+data "azurerm_resource_group" "tidy_tuesdays" {
+  name = "tidy-tuesdays"
 }
 
-# Create Static Web App
-resource "azurerm_static_site" "tidy_tuesdays" {
+# Update to use the newer azurerm_static_web_app resource
+resource "azurerm_static_web_app" "tidy_tuesdays" {
   name                = "tidy-tuesdays"
-  resource_group_name = azurerm_resource_group.tidy_tuesdays.name
-  location            = azurerm_resource_group.tidy_tuesdays.location
-}
-
-# Output the Static Web Apps deployment token to use in GitHub Actions
-output "static_web_app_api_token" {
-  value     = azurerm_static_site.tidy_tuesdays.api_key
-  sensitive = true
-}
-
-# Output the default hostname
-output "default_hostname" {
-  value = azurerm_static_site.tidy_tuesdays.default_host_name
+  resource_group_name = data.azurerm_resource_group.tidy_tuesdays.name
+  location            = data.azurerm_resource_group.tidy_tuesdays.location
+  sku_tier            = "Free"
+  sku_size            = "Free"
 }
