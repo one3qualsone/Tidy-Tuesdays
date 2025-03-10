@@ -17,7 +17,7 @@ library(maps)      # For maps
 library(viridis)   # For color scales
 library(patchwork) # For combining plots
 
-# Create sample data
+# Create sample data with a more reliable approach
 set.seed(42)
 
 # Countries that produce coffee
@@ -36,39 +36,57 @@ coffee_data <- expand.grid(
   year = years
 )
 
-# Add production (in thousands of 60kg bags)
-coffee_data$production <- case_when(
-  coffee_data$country == "Brazil" ~ sample(50000:60000, nrow(coffee_data[coffee_data$country == "Brazil", ]), replace = TRUE),
-  coffee_data$country == "Vietnam" ~ sample(25000:30000, nrow(coffee_data[coffee_data$country == "Vietnam", ]), replace = TRUE),
-  coffee_data$country == "Colombia" ~ sample(12000:15000, nrow(coffee_data[coffee_data$country == "Colombia", ]), replace = TRUE),
-  coffee_data$country == "Indonesia" ~ sample(10000:12000, nrow(coffee_data[coffee_data$country == "Indonesia", ]), replace = TRUE),
-  coffee_data$country == "Ethiopia" ~ sample(6000:8000, nrow(coffee_data[coffee_data$country == "Ethiopia", ]), replace = TRUE),
-  TRUE ~ sample(3000:7000, nrow(coffee_data[!(coffee_data$country %in% c("Brazil", "Vietnam", "Colombia", "Indonesia", "Ethiopia")), ]), replace = TRUE)
+# Define production ranges for each country
+production_ranges <- data.frame(
+  country = coffee_countries,
+  min_prod = c(50000, 25000, 12000, 10000, 6000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000),
+  max_prod = c(60000, 30000, 15000, 12000, 8000, 7000, 7000, 7000, 7000, 7000, 7000, 7000, 7000, 7000, 7000)
 )
 
-# Add exports (in thousands of 60kg bags)
-coffee_data$exports <- coffee_data$production * runif(nrow(coffee_data), 0.5, 0.9)
+# Safer approach for adding production values
+coffee_data <- coffee_data %>%
+  left_join(production_ranges, by = "country") %>%
+  rowwise() %>%
+  mutate(
+    # Generate production value within range for each country
+    production = sample(min_prod:max_prod, 1),
+    # Add exports as a percentage of production
+    exports = production * runif(1, 0.5, 0.9),
+    # Domestic consumption is the remainder
+    domestic_consumption = production - exports
+  ) %>%
+  ungroup()
 
-# Add domestic consumption (in thousands of 60kg bags)
-coffee_data$domestic_consumption <- coffee_data$production - coffee_data$exports
+# Determine price based on country groups
+arabica_countries <- c("Colombia", "Costa Rica", "Guatemala", "Kenya")
+robusta_countries <- c("Brazil", "Vietnam", "India", "Indonesia")
 
-# Add price (USD per pound)
-coffee_data$price <- case_when(
-  coffee_data$country %in% c("Colombia", "Costa Rica", "Guatemala", "Kenya") ~ runif(nrow(coffee_data[coffee_data$country %in% c("Colombia", "Costa Rica", "Guatemala", "Kenya"), ]), 2.5, 4.5),
-  TRUE ~ runif(nrow(coffee_data[!(coffee_data$country %in% c("Colombia", "Costa Rica", "Guatemala", "Kenya")), ]), 1.5, 3.5)
-)
+# Add price and variety
+coffee_data <- coffee_data %>%
+  mutate(
+    # Price depends on country group
+    price = ifelse(country %in% arabica_countries, 
+                  runif(n(), 2.5, 4.5), 
+                  runif(n(), 1.5, 3.5)),
+    # Variety depends on country
+    variety = ifelse(country %in% robusta_countries, "Robusta", "Arabica")
+  )
 
-# Add variety
-coffee_data$variety <- case_when(
-  coffee_data$country %in% c("Brazil", "Vietnam", "India", "Indonesia") ~ "Robusta",
-  TRUE ~ "Arabica"
-)
+# Define high altitude countries
+high_altitude_countries <- c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica")
 
-# Add growing altitude (meters)
-coffee_data$altitude <- case_when(
-  coffee_data$country %in% c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica") ~ sample(1200:2000, nrow(coffee_data[coffee_data$country %in% c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica"), ]), replace = TRUE),
-  TRUE ~ sample(600:1200, nrow(coffee_data[!(coffee_data$country %in% c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica")), ]), replace = TRUE)
-)
+# Add altitude data
+coffee_data <- coffee_data %>%
+  mutate(
+    # Altitude depends on country group
+    altitude = ifelse(country %in% high_altitude_countries,
+                     sample(1200:2000, n(), replace = TRUE),
+                     sample(600:1200, n(), replace = TRUE))
+  )
+
+# Clean up temporary columns
+coffee_data <- coffee_data %>%
+  select(-min_prod, -max_prod)
 ```
 
 ## Introduction
