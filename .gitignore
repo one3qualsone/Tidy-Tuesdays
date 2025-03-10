@@ -77,3 +77,11 @@ project_files.txt
 *.pem
 *.key
 **/secrets/
+
+# Environment files with sensitive information
+.env
+.env.local
+.env.*.local
+
+# But keep the template
+!.env.template
