@@ -39,23 +39,36 @@ jobs:
         with:
           r-version: '4.2.0'
       
-      # Install required R packages
-      - name: Install core R packages
+      # Install all required packages
+      - name: Install R packages
         run: |
-          install.packages(c("rmarkdown", "knitr", "dplyr", "ggplot2", "shiny", "bslib", "ggExtra"), repos = "https://cloud.r-project.org")
-        shell: Rscript {0}
-      
-      # Try to install other packages, but don't fail if they can't be installed
-      - name: Install additional R packages
-        run: |
-          install.packages(c("lubridate", "plotly", "maps", "viridis", "patchwork"), repos = "https://cloud.r-project.org")
-        shell: Rscript {0}
-        continue-on-error: true
-      
-      # List installed packages for debugging
-      - name: List installed R packages
-        run: |
-          installed.packages()[,1]
+          # Install individual packages
+          packages <- c(
+            # Core packages needed for rendering
+            "rmarkdown", "knitr", "dplyr", "ggplot2", "readr", 
+            "shiny", "bslib", "ggExtra",
+            
+            # Additional packages used in individual examples
+            "lubridate", "plotly", "maps", "viridis", "patchwork"
+          )
+          
+          # Install each package, reporting on success/failure
+          results <- lapply(packages, function(pkg) {
+            result <- try(install.packages(pkg, repos = "https://cloud.r-project.org"), silent = TRUE)
+            return(c(package = pkg, success = !inherits(result, "try-error")))
+          })
+          
+          # List results
+          cat("Package installation results:\n")
+          for (i in seq_along(results)) {
+            status <- if(results[[i]][2] == "TRUE") "SUCCESS" else "FAILED"
+            cat(sprintf("- %s: %s\n", results[[i]][1], status))
+          }
+          
+          # Print installed packages
+          cat("\nInstalled packages:\n")
+          installed <- installed.packages()[,1]
+          cat(paste(installed, collapse = ", "), "\n")
         shell: Rscript {0}
       
       # Install Quarto
