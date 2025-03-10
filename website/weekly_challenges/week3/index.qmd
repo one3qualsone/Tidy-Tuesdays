@@ -10,11 +10,12 @@ execute:
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
-library(ggplot2)
-library(maps)
-library(viridis)
-library(patchwork)
+# Replace tidyverse with individual packages
+library(ggplot2)   # For plotting
+library(dplyr)     # For data manipulation
+library(maps)      # For maps
+library(viridis)   # For color scales
+library(patchwork) # For combining plots
 
 # Create sample data
 set.seed(42)

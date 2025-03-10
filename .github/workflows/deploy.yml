@@ -46,7 +46,7 @@ jobs:
           packages <- c(
             # Core packages needed for rendering
             "rmarkdown", "knitr", "dplyr", "ggplot2", "readr", 
-            "shiny", "bslib", "ggExtra",
+            "shiny", "bslib", "ggExtra", "tibble", "tidyr",
             
             # Additional packages used in individual examples
             "lubridate", "plotly", "maps", "viridis", "patchwork"

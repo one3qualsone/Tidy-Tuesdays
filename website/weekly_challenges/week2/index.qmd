@@ -10,10 +10,11 @@ execute:
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
-library(lubridate)
-library(ggplot2)
-library(plotly)
+# Replace tidyverse with individual packages
+library(dplyr)      # For data manipulation
+library(ggplot2)    # For plotting
+library(lubridate)  # For date handling
+library(plotly)     # For interactive plots
 
 # This is where you'd load the air quality data
 # For this example, we'll create some sample data
@@ -100,7 +101,7 @@ air_quality %>%
     avg_pm10 = mean(pm10),
     avg_no2 = mean(no2)
   ) %>%
-  pivot_longer(
+  tidyr::pivot_longer(
     cols = starts_with("avg_"),
     names_to = "pollutant",
     values_to = "value"
@@ -174,8 +175,8 @@ air_quality %>%
   select(aqi, pm25, pm10, no2) %>%
   cor() %>%
   as.data.frame() %>%
-  rownames_to_column("pollutant1") %>%
-  pivot_longer(-pollutant1, names_to = "pollutant2", values_to = "correlation") %>%
+  tibble::rownames_to_column("pollutant1") %>%
+  tidyr::pivot_longer(-pollutant1, names_to = "pollutant2", values_to = "correlation") %>%
   ggplot(aes(x = pollutant1, y = pollutant2, fill = correlation)) +
   geom_tile() +
   geom_text(aes(label = round(correlation, 2)), color = "white", size = 4) +
