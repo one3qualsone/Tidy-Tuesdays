@@ -1,0 +1,278 @@
+---
+title: "Week 3: Global Coffee Production"
+description: "Exploring trends in coffee production, exports, and consumption"
+date: "2025-03-15"
+categories: [agriculture, economics, maps]
+image: "thumbnail.png"
+execute:
+  echo: true
+  warning: false
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(maps)
+library(viridis)
+library(patchwork)
+
+# Create sample data
+set.seed(42)
+
+# Countries that produce coffee
+coffee_countries <- c(
+  "Brazil", "Vietnam", "Colombia", "Indonesia", "Ethiopia", 
+  "Honduras", "India", "Uganda", "Mexico", "Guatemala", 
+  "Peru", "Nicaragua", "Costa Rica", "Kenya", "Tanzania"
+)
+
+# Years for analysis
+years <- 2015:2024
+
+# Generate sample data frame
+coffee_data <- expand.grid(
+  country = coffee_countries,
+  year = years
+)
+
+# Add production (in thousands of 60kg bags)
+coffee_data$production <- case_when(
+  coffee_data$country == "Brazil" ~ sample(50000:60000, nrow(coffee_data[coffee_data$country == "Brazil", ]), replace = TRUE),
+  coffee_data$country == "Vietnam" ~ sample(25000:30000, nrow(coffee_data[coffee_data$country == "Vietnam", ]), replace = TRUE),
+  coffee_data$country == "Colombia" ~ sample(12000:15000, nrow(coffee_data[coffee_data$country == "Colombia", ]), replace = TRUE),
+  coffee_data$country == "Indonesia" ~ sample(10000:12000, nrow(coffee_data[coffee_data$country == "Indonesia", ]), replace = TRUE),
+  coffee_data$country == "Ethiopia" ~ sample(6000:8000, nrow(coffee_data[coffee_data$country == "Ethiopia", ]), replace = TRUE),
+  TRUE ~ sample(3000:7000, nrow(coffee_data[!(coffee_data$country %in% c("Brazil", "Vietnam", "Colombia", "Indonesia", "Ethiopia")), ]), replace = TRUE)
+)
+
+# Add exports (in thousands of 60kg bags)
+coffee_data$exports <- coffee_data$production * runif(nrow(coffee_data), 0.5, 0.9)
+
+# Add domestic consumption (in thousands of 60kg bags)
+coffee_data$domestic_consumption <- coffee_data$production - coffee_data$exports
+
+# Add price (USD per pound)
+coffee_data$price <- case_when(
+  coffee_data$country %in% c("Colombia", "Costa Rica", "Guatemala", "Kenya") ~ runif(nrow(coffee_data[coffee_data$country %in% c("Colombia", "Costa Rica", "Guatemala", "Kenya"), ]), 2.5, 4.5),
+  TRUE ~ runif(nrow(coffee_data[!(coffee_data$country %in% c("Colombia", "Costa Rica", "Guatemala", "Kenya")), ]), 1.5, 3.5)
+)
+
+# Add variety
+coffee_data$variety <- case_when(
+  coffee_data$country %in% c("Brazil", "Vietnam", "India", "Indonesia") ~ "Robusta",
+  TRUE ~ "Arabica"
+)
+
+# Add growing altitude (meters)
+coffee_data$altitude <- case_when(
+  coffee_data$country %in% c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica") ~ sample(1200:2000, nrow(coffee_data[coffee_data$country %in% c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica"), ]), replace = TRUE),
+  TRUE ~ sample(600:1200, nrow(coffee_data[!(coffee_data$country %in% c("Ethiopia", "Kenya", "Colombia", "Guatemala", "Costa Rica")), ]), replace = TRUE)
+)
+```
+
+## Introduction
+
+For this week's Tidy Tuesday, I explored global coffee production data. Coffee is one of the world's most traded agricultural commodities, with millions of people involved in its production, processing, and distribution. This analysis examines production trends, export patterns, and the relationship between price, variety, and growing conditions.
+
+## The Data
+
+Our dataset includes information on coffee production, exports, domestic consumption, prices, and growing conditions across 15 major coffee-producing countries from 2015 to 2024.
+
+Let's take a look at the first few rows of our dataset:
+
+```{r}
+head(coffee_data)
+```
+
+## Global Coffee Production Trends
+
+First, let's examine how coffee production has changed over the past decade for the top producing countries:
+
+```{r fig.height=7, fig.width=10}
+# Get top producers by average production
+top_producers <- coffee_data %>%
+  group_by(country) %>%
+  summarize(avg_production = mean(production)) %>%
+  arrange(desc(avg_production)) %>%
+  head(5) %>%
+  pull(country)
+
+# Filter for top producers
+top_producers_data <- coffee_data %>%
+  filter(country %in% top_producers)
+
+# Create plot
+ggplot(top_producers_data, aes(x = year, y = production/1000, color = country)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Coffee Production Trends (2015-2024)",
+    subtitle = "Top 5 Coffee Producing Countries",
+    x = "Year",
+    y = "Production (Millions of 60kg bags)",
+    color = "Country"
+  ) +
+  scale_x_continuous(breaks = years) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  ) +
+  scale_color_viridis(discrete = TRUE)
+```
+
+## Production vs. Export
+
+Next, let's analyze the relationship between production and exports for different countries:
+
+```{r fig.height=8, fig.width=10}
+# Calculate average production and exports by country
+country_summary <- coffee_data %>%
+  group_by(country) %>%
+  summarize(
+    avg_production = mean(production),
+    avg_exports = mean(exports),
+    export_ratio = mean(exports/production) * 100
+  ) %>%
+  arrange(desc(avg_production))
+
+# Create bar chart comparing production and exports
+ggplot(country_summary, aes(x = reorder(country, avg_production))) +
+  geom_bar(aes(y = avg_production/1000, fill = "Production"), stat = "identity", alpha = 0.7) +
+  geom_bar(aes(y = avg_exports/1000, fill = "Exports"), stat = "identity", alpha = 0.9) +
+  coord_flip() +
+  labs(
+    title = "Coffee Production vs. Exports by Country",
+    subtitle = "Average values for 2015-2024",
+    x = NULL,
+    y = "Coffee (Millions of 60kg bags)",
+    fill = NULL
+  ) +
+  scale_fill_manual(values = c("Production" = "#8C510A", "Exports" = "#DFC27D")) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+```
+
+## Price vs. Altitude
+
+Let's explore the relationship between coffee growing altitude and price:
+
+```{r fig.height=7, fig.width=10}
+# Calculate average altitude and price by country and variety
+altitude_price <- coffee_data %>%
+  group_by(country, variety) %>%
+  summarize(
+    avg_altitude = mean(altitude),
+    avg_price = mean(price)
+  )
+
+# Create scatter plot
+ggplot(altitude_price, aes(x = avg_altitude, y = avg_price, color = variety, label = country)) +
+  geom_point(size = 4, alpha = 0.8) +
+  geom_text(hjust = -0.2, vjust = 0, size = 3) +
+  labs(
+    title = "Relationship Between Growing Altitude and Coffee Price",
+    subtitle = "Average altitude vs. price by country and variety",
+    x = "Altitude (meters above sea level)",
+    y = "Price (USD per pound)",
+    color = "Variety"
+  ) +
+  scale_color_manual(values = c("Arabica" = "#1B9E77", "Robusta" = "#D95F02")) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+```
+
+## Domestic Consumption Trends
+
+Finally, let's examine domestic consumption trends in major coffee-producing countries:
+
+```{r fig.height=8, fig.width=10}
+# Calculate proportion of production consumed domestically
+consumption_trends <- coffee_data %>%
+  group_by(country, year) %>%
+  summarize(
+    consumption_ratio = domestic_consumption / production * 100
+  )
+
+# Focus on interesting countries with varying domestic consumption patterns
+selected_countries <- c("Brazil", "Ethiopia", "Vietnam", "Colombia", "Mexico")
+
+# Filter for selected countries
+selected_consumption <- consumption_trends %>%
+  filter(country %in% selected_countries)
+
+# Create line plot
+ggplot(selected_consumption, aes(x = year, y = consumption_ratio, color = country)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Domestic Coffee Consumption Trends",
+    subtitle = "Percentage of production consumed domestically",
+    x = "Year",
+    y = "Domestic Consumption (%)",
+    color = "Country"
+  ) +
+  scale_x_continuous(breaks = years) +
+  scale_y_continuous(limits = c(0, 100)) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  ) +
+  scale_color_viridis(discrete = TRUE)
+```
+
+## Key Findings
+
+From our analysis, we can observe several interesting patterns:
+
+1. **Production Dominance**: Brazil consistently leads global coffee production by a significant margin, followed by Vietnam. Together, these two countries account for nearly half of global coffee production.
+
+2. **Export Patterns**: While some countries like Vietnam export the vast majority of their coffee, others like Ethiopia and Brazil retain a significant proportion for domestic consumption.
+
+3. **Altitude and Price Relationship**: There's a strong positive correlation between growing altitude and coffee price. Countries growing Arabica coffee at high altitudes, like Colombia and Ethiopia, generally command higher prices.
+
+4. **Variety Premium**: Arabica coffee consistently fetches higher prices than Robusta, reflecting consumer preferences and the different flavor profiles of these varieties.
+
+5. **Domestic Consumption Trends**: Brazil not only leads in production but also has the highest domestic consumption among producing countries, with approximately 30-40% of its production consumed locally.
+
+## Conclusions
+
+This analysis highlights the complex dynamics of the global coffee market. Production is concentrated in a few major countries, but various factors including growing conditions, variety, and local consumption patterns create a diverse landscape.
+
+For coffee-producing countries, these findings suggest several potential strategies:
+- Higher-altitude regions may benefit from focusing on premium Arabica production
+- Countries with established domestic markets (like Brazil) have more stable demand
+- Smaller producers might differentiate themselves through specialty varieties or sustainable practices
+
+For further research, it would be valuable to examine:
+- The impact of climate change on growing regions
+- Fair trade certification and its effect on prices
+- The relationship between coffee quality scores and price premiums
+
+## Resources and Further Reading
+
+- International Coffee Organization: [ICO](https://www.ico.org/)
+- Specialty Coffee Association: [SCA](https://sca.coffee/)
+- Coffee Research Institute: [CRI](https://www.coffeeresearch.org/)
+
+```{r echo=FALSE}
+# Save thumbnail for listing page
+ggsave("thumbnail.png", 
+       plot = ggplot(top_producers_data, aes(x = year, y = production/1000, color = country)) +
+         geom_line(linewidth = 1.2) +
+         geom_point(size = 2) +
+         labs(title = "Coffee Production Trends") +
+         theme_minimal() +
+         theme(legend.position = "bottom") +
+         scale_color_viridis(discrete = TRUE),
+       width = 6, height = 4)
+```

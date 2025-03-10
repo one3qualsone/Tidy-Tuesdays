@@ -1,5 +1,44 @@
 ---
-title: "About"
+title: "About This Project"
 ---
 
-About this site
+## What is Tidy Tuesday?
+
+[Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) is a weekly data project aimed at the R ecosystem. As stated in the R for Data Science Online Learning Community's GitHub repo:
+
+> The intent of Tidy Tuesday is to provide a safe and supportive forum for individuals to practice their wrangling and data visualization skills independently and in public.
+
+Every week, a new dataset is posted, and participants explore and visualize the data, sharing their creations with the community.
+
+## About This Site
+
+This site showcases my weekly explorations and visualizations for the Tidy Tuesday challenges. Each week, I explore a different dataset, trying new techniques, packages, and visualization approaches.
+
+My goals with this project are to:
+
+1. **Improve my R programming skills** - particularly with the tidyverse ecosystem
+2. **Enhance my data visualization repertoire** - learning new techniques and design principles
+3. **Practice data storytelling** - finding meaningful insights in data and conveying them effectively
+4. **Contribute to the R community** - sharing code and visualizations that others might learn from
+
+## About Me
+
+I'm passionate about data analysis and visualization. With a background in [your partner's background], I enjoy exploring datasets and finding interesting patterns and stories within them.
+
+When I'm not analyzing data, I [other interests or hobbies].
+
+## Technical Details
+
+This site is built with [Quarto](https://quarto.org/), a open-source scientific and technical publishing system. It's hosted on Azure Static Web Apps and automatically deployed through GitHub Actions.
+
+The code for all analyses is available in the [GitHub repository](https://github.com/yourusername/tidy-tuesdays).
+
+## Contact
+
+If you'd like to connect or have questions about any of the analyses, you can reach me at:
+
+- GitHub: [Your GitHub Username](https://github.com/yourusername)
+- Twitter: [@YourTwitterHandle](https://twitter.com/yourtwitterhandle)
+- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+
+I welcome feedback, suggestions, and collaboration opportunities!

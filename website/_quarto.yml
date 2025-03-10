@@ -1,48 +1,30 @@
 project:
   type: website
+  output-dir: _site
+
+website:
+  title: "Tidy Tuesdays"
+  favicon: resources/favicon.png
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Weekly Challenges"
+        file: weekly_challenges/index.qmd
+      - text: "About"
+        file: about.qmd
+    right:
+      - icon: github
+        href: https://github.com/yourusername/tidy-tuesdays
+  page-footer:
+    center:
+      - text: "© 2025 Your Name"
+
 format:
   html:
+    theme: cosmo
     css: resources/styles.css
-    page-layout: article
-    theme:
-      light: cosmo
-      dark: darkly
-    code-copy: true
-    code-overflow: wrap
     toc: true
-website:
-  title: Tidy Tuesdays
-  navbar:
-    tools:
-    - icon: twitter
-      href: https://twitter.com
-    - icon: github
-      href: https://github.com/one3qualsone/Tidy-Tuesdays
-  sidebar:
-    style: floating
-    search: true
-    align: left
-    collapse-level: 2
-    contents:
-    - section: Tidy Tuesdays
-      contents: null
-    - href: index.qmd
-      text: Introduction
-    - section: Weekly Challenges
-      contents:
-      - section: '2024'
-        contents:
-        - href: ../weekly_challenges/week1/app.qmd
-          text: Week 1
-        - href: ../weekly_challenges/week2/app.qmd
-          text: Week 2
-        - href: ../weekly_challenges/week3/app.qmd
-          text: Week 3
-page-footer:
-  center:
-  - text: About
-    href: about.qmd
-  - text: License
-    href: license.qmd
-  - text: Trademark
-    href: trademark.qmd
+    page-layout: full

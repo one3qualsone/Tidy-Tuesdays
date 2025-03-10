@@ -1,0 +1,19 @@
+---
+title: "Weekly Challenges"
+listing:
+  contents: "*/index.qmd"
+  sort: "date desc"
+  type: grid
+  categories: true
+  sort-ui: true
+  filter-ui: true
+  fields: [date, title, image, description, categories]
+  feed: true
+page-layout: full
+---
+
+# Weekly Challenge Archive
+
+Explore my weekly Tidy Tuesday data visualization challenges. Each entry represents a different dataset and visualization approach, showcasing various R packages and techniques.
+
+Browse by date or filter by category to find specific types of visualizations or topics.
