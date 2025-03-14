@@ -1,7 +1,7 @@
 ---
 title: "Week 3: Global Coffee Production"
 description: "Exploring trends in coffee production, exports, and consumption"
-date: "2025-03-15"
+date: "2025-03-09"
 categories: [agriculture, economics, maps]
 image: "thumbnail.png"
 execute:
@@ -16,6 +16,8 @@ library(dplyr)     # For data manipulation
 library(maps)      # For maps
 library(viridis)   # For color scales
 library(patchwork) # For combining plots
+library(knitr)     # For table formatting
+library(kableExtra) # For enhanced table styling
 
 # Create sample data with a more reliable approach
 set.seed(42)
@@ -100,7 +102,43 @@ Our dataset includes information on coffee production, exports, domestic consump
 Let's take a look at the first few rows of our dataset:
 
 ```{r}
-head(coffee_data)
+# Using kable for better table formatting
+head(coffee_data) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
+```
+
+## Production vs. Export Analysis
+
+Let's also look at a summary of production and export data by country:
+
+```{r}
+# Calculate average production and exports by country
+country_summary <- coffee_data %>%
+  group_by(country) %>%
+  summarize(
+    avg_production = mean(production),
+    avg_exports = mean(exports),
+    export_ratio = mean(exports/production) * 100
+  ) %>%
+  arrange(desc(avg_production))
+
+# Display nicely formatted table
+country_summary %>%
+  mutate(
+    avg_production = round(avg_production, 0),
+    avg_exports = round(avg_exports, 0),
+    export_ratio = round(export_ratio, 1)
+  ) %>%
+  rename(
+    Country = country,
+    "Avg Production" = avg_production,
+    "Avg Exports" = avg_exports,
+    "Export Ratio (%)" = export_ratio
+  ) %>%
+  kable(caption = "Coffee Production and Export Summary by Country") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE) %>%
+  row_spec(1:3, background = "#F8F8DC")  # Highlight top 3 producers
 ```
 
 ## Global Coffee Production Trends
@@ -146,16 +184,6 @@ ggplot(top_producers_data, aes(x = year, y = production/1000, color = country)) 
 Next, let's analyze the relationship between production and exports for different countries:
 
 ```{r fig.height=8, fig.width=10}
-# Calculate average production and exports by country
-country_summary <- coffee_data %>%
-  group_by(country) %>%
-  summarize(
-    avg_production = mean(production),
-    avg_exports = mean(exports),
-    export_ratio = mean(exports/production) * 100
-  ) %>%
-  arrange(desc(avg_production))
-
 # Create bar chart comparing production and exports
 ggplot(country_summary, aes(x = reorder(country, avg_production))) +
   geom_bar(aes(y = avg_production/1000, fill = "Production"), stat = "identity", alpha = 0.7) +

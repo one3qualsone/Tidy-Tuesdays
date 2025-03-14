@@ -23,22 +23,18 @@ My goals with this project are to:
 
 ## About Me
 
-I'm passionate about data analysis and visualization. With a background in [your partner's background], I enjoy exploring datasets and finding interesting patterns and stories within them.
-
-When I'm not analyzing data, I [other interests or hobbies].
+I'm passionate about data analysis and visualization. I enjoy exploring datasets and finding interesting patterns and stories within them.
 
 ## Technical Details
 
-This site is built with [Quarto](https://quarto.org/), a open-source scientific and technical publishing system. It's hosted on Azure Static Web Apps and automatically deployed through GitHub Actions.
+This site is built with [Quarto](https://quarto.org/), an open-source scientific and technical publishing system. It's hosted on Netlify and automatically deployed through GitHub Actions.
 
-The code for all analyses is available in the [GitHub repository](https://github.com/yourusername/tidy-tuesdays).
+The code for all analyses is available in the [GitHub repository](https://github.com/one3qualsone/Tidy-Tuesdays).
 
 ## Contact
 
 If you'd like to connect or have questions about any of the analyses, you can reach me at:
 
-- GitHub: [Your GitHub Username](https://github.com/yourusername)
-- Twitter: [@YourTwitterHandle](https://twitter.com/yourtwitterhandle)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- LinkedIn: [Annabel Smith](https://www.linkedin.com/in/annabel-smith-6bb339151/)
 
 I welcome feedback, suggestions, and collaboration opportunities!

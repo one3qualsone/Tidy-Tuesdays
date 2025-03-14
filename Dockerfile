@@ -3,16 +3,17 @@ FROM rocker/verse:4.2.0
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     curl \
+    wget \
     gdebi-core \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Quarto
-RUN curl -s https://download1.rstudio.org/electron/focal/amd64/quarto-1.3.450-linux-amd64.deb -o quarto.deb \
-    && gdebi -n quarto.deb \
-    && rm quarto.deb
+# Install Quarto (using GitHub URL which is more reliable)
+RUN wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb && \
+    dpkg -i quarto-1.3.450-linux-amd64.deb && \
+    rm quarto-1.3.450-linux-amd64.deb
 
-# Install R packages
-RUN R -e "install.packages(c('rmarkdown', 'knitr', 'dplyr', 'ggplot2', 'tidyverse', 'shiny', 'bslib', 'ggExtra', 'lubridate', 'plotly', 'maps', 'viridis', 'patchwork'), repos = 'https://cloud.r-project.org/')"
+# Install R packages - add tidyr explicitly
+RUN R -e "install.packages(c('rmarkdown', 'knitr', 'dplyr', 'ggplot2', 'tidyverse', 'tidyr', 'shiny', 'bslib', 'ggExtra', 'lubridate', 'plotly', 'maps', 'viridis', 'patchwork', 'kableExtra'), repos = 'https://cloud.r-project.org/')"
 
 # Set working directory
 WORKDIR /project

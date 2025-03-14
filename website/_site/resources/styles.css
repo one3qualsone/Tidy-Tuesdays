@@ -1,0 +1,115 @@
+/* Custom styles for Tidy Tuesdays website */
+
+/* Hero banner section */
+.hero-banner {
+    padding: 4rem 0;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-banner h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .hero-banner h3 {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Card styling for listings */
+  .listing-grid .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .listing-grid .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .listing-grid .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .listing-grid .card-title {
+    font-weight: 600;
+  }
+  
+  .listing-grid .card-text {
+    font-size: 0.9rem;
+  }
+  
+  /* Code block styling */
+  pre.sourceCode {
+    border-left: 4px solid #007bff;
+    padding-left: 1rem;
+  }
+  
+  /* Table styling */
+  table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+  }
+  
+  table th {
+    background-color: #f8f9fa;
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Categories styling */
+  .quarto-category {
+    background-color: #f0f7ff;
+    color: #0056b3;
+    border-radius: 3px;
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  /* Footer styling */
+  .footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  /* Plot container */
+  .plot-container {
+    margin: 2rem 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #fff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero-banner h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-banner h3 {
+      font-size: 1.2rem;
+    }
+  }

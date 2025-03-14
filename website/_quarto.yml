@@ -17,10 +17,10 @@ website:
         file: about.qmd
     right:
       - icon: github
-        href: https://github.com/yourusername/tidy-tuesdays
+        href: https://github.com/one3qualsone/Tidy-Tuesdays
   page-footer:
     center:
-      - text: "© 2025 Your Name"
+      - text: "© 2025 | Tidy Tuesdays Personal Project"
 
 format:
   html:

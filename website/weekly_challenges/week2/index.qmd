@@ -1,7 +1,7 @@
 ---
 title: "Week 2: Global Air Quality"
 description: "Analyzing air quality measurements across major global cities"
-date: "2025-03-08"
+date: "2025-02-12"
 categories: [time series, air quality, environmental]
 image: "thumbnail.png"
 execute:
@@ -15,6 +15,8 @@ library(dplyr)      # For data manipulation
 library(ggplot2)    # For plotting
 library(lubridate)  # For date handling
 library(plotly)     # For interactive plots
+library(knitr)      # For table formatting
+library(kableExtra) # For enhanced table styling
 
 # This is where you'd load the air quality data
 # For this example, we'll create some sample data
@@ -61,7 +63,10 @@ The dataset contains air quality measurements from major cities around the world
 Let's take a look at the first few rows:
 
 ```{r}
-head(air_quality)
+# Using kable for better table formatting
+head(air_quality) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
 ```
 
 ## Air Quality Over Time
@@ -137,32 +142,27 @@ air_quality %>%
 Let's examine the distribution of air quality categories across cities:
 
 ```{r fig.height=7, fig.width=10}
-air_quality %>%
-  count(city, quality_category) %>%
-  group_by(city) %>%
-  mutate(percentage = n / sum(n) * 100) %>%
-  ggplot(aes(x = city, y = percentage, fill = quality_category)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(
-    values = c(
-      "Good" = "#00E400",
-      "Moderate" = "#FFFF00",
-      "Unhealthy for Sensitive Groups" = "#FF7E00",
-      "Unhealthy" = "#FF0000",
-      "Very Unhealthy" = "#99004C"
-    )
-  ) +
+# Plot directly with the original styling
+ggplot(air_quality, aes(x = city, y = aqi, fill = quality_category)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = c(
+    "Good" = "#91CF60",               # A softer green
+    "Moderate" = "#FFFFBF",           # Pale yellow
+    "Unhealthy for Sensitive Groups" = "#FEE08B", # Soft orange
+    "Unhealthy" = "#FC8D59",          # Muted red-orange
+    "Very Unhealthy" = "#D73027",     # Muted red
+    "Hazardous" = "#A50026"           # Darker red
+  )) +
   labs(
-    title = "Distribution of Air Quality Categories by City",
-    subtitle = "January - March 2024",
+    title = "Distribution of Air Quality Index by City",
     x = "City",
-    y = "Percentage",
+    y = "Air Quality Index (AQI)",
     fill = "Air Quality Category"
   ) +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    legend.position = "right"
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
   )
 ```
 

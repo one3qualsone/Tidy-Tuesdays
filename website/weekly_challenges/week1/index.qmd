@@ -1,7 +1,7 @@
 ---
 title: "Week 1: Palmer Penguins"
 description: "Exploring penguin size measurements across species"
-date: "2025-03-01"
+date: "2025-01-15"
 categories: [data visualization, ggplot2, penguins]
 image: "thumbnail.png"
 execute:
@@ -10,13 +10,14 @@ execute:
 ---
 
 ```{r setup, include=FALSE}
-library(shiny)
-library(bslib)
 library(dplyr)
 library(ggplot2)
 library(ggExtra)
+library(knitr)
+library(kableExtra)
+library(tidyr)  # Added this for spread function
 
-# This is where you'd load the data for the static rendering
+# Load the data for the static rendering
 penguins_csv <- "https://raw.githubusercontent.com/jcheng5/simplepenguins.R/main/penguins.csv"
 df <- readr::read_csv(penguins_csv)
 ```
@@ -30,13 +31,15 @@ This week's Tidy Tuesday featured the Palmer Penguins dataset, which includes si
 Let's look at the first few rows of the dataset:
 
 ```{r}
-head(df)
+# Using kable for better table formatting
+head(df) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
 ```
 
 ## Key Variables
 
 The dataset includes several key measurements:
-
 - Bill length (mm)
 - Bill depth (mm)
 - Flipper length (mm)
@@ -56,36 +59,36 @@ ggplot(df, aes(x = `Bill Length (mm)`, y = `Bill Depth (mm)`, color = Species)) 
   theme(legend.position = "bottom")
 ```
 
-## Interactive Version
+## Enhanced Visualization
 
-Below is an interactive version of this visualization where you can select different measurements to compare:
+Here's an enhanced version with trend lines to better visualize the relationship:
 
-```{r, echo=FALSE}
-# Display a static version of the plot for the website
-# In a real implementation, you'd render the interactive app to an iframe
-# using knitr::include_app() or similar
-
+```{r}
 ggplot(df, aes(x = `Bill Length (mm)`, y = `Bill Depth (mm)`, color = Species)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Penguin Bill Dimensions by Species (with trend lines)",
-       subtitle = "Interactive version available in the Shiny app",
        x = "Bill Length (mm)",
        y = "Bill Depth (mm)") +
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
 
-For the full interactive experience, [launch the Shiny app](https://yourusername.shinyapps.io/week1-penguins/).
+## Exploring Species Distribution by Island
 
-## Analysis
+Let's look at how the penguin species are distributed across the islands:
 
-From our visualization, we can observe:
+```{r}
+# Create a summary table of species by island
+species_by_island <- df %>%
+  count(Species, Island) %>%
+  spread(Island, n, fill = 0)
 
-1. There's a clear separation between the species based on bill dimensions
-2. Gentoo penguins have longer, narrower bills
-3. Adelie penguins have shorter, deeper bills
-4. Chinstrap penguins fall somewhere in between 
+# Display as a nicely formatted table
+species_by_island %>%
+  kable(caption = "Penguin Species Distribution by Island") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
+```
 
 ## Conclusion
 
@@ -95,3 +98,12 @@ This exploration demonstrates how simple visualizations can reveal clear pattern
 
 - [Palmer Penguins R Package](https://allisonhorst.github.io/palmerpenguins/)
 - [Original Data Source](https://doi.org/10.1371/journal.pone.0090081)
+
+```{r echo=FALSE}
+# Save thumbnail for the listing page
+ggsave("thumbnail.png", 
+       plot = ggplot(df, aes(x = `Bill Length (mm)`, y = `Bill Depth (mm)`, color = Species)) +
+         geom_point(alpha = 0.7) +
+         theme_minimal(),
+       width = 6, height = 4)
+```
