@@ -1,15 +1,8 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "website/_site/**",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/website/_site/$1"
-      }
-    ]
+    "buildCommand": false,
+    "outputDirectory": "website/_site",
+    "github": {
+      "silent": true
+    }
   }
