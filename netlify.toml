@@ -1,0 +1,3 @@
+[build]
+  publish = "website/_site"
+  command = "echo 'Netlify build - site is pre-built by GitHub Actions'"

@@ -43,11 +43,24 @@ jobs:
           cd website
           quarto render
       
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
+      - name: List files for debugging
+        run: |
+          echo "Contents of website directory:"
+          ls -la website
+          echo "Contents of _site directory (if it exists):"
+          ls -la website/_site || echo "Directory does not exist"
+      
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-          working-directory: ./website
+          publish-dir: './website/_site'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5

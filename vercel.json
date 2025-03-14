@@ -1,8 +1,0 @@
-{
-    "version": 2,
-    "buildCommand": false,
-    "outputDirectory": "website/_site",
-    "github": {
-      "silent": true
-    }
-  }
