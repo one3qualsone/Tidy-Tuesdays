@@ -1,21 +1,21 @@
 ---
 title: "Tidy Tuesdays"
-subtitle: "Weekly Data Visualization Challenges"
+subtitle: "Weekly Data Visualisation Challenges"
 page-layout: full
 ---
 
 :::: {.column-screen}
 ::: {.hero-banner style="padding: 2em; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('resources/cover_small.jpg'); background-size: cover; color: white; text-align: center; margin-bottom: 2em;"}
 # Exploring Data through R
-### A collection of weekly data visualization challenges
+### A collection of weekly data visualisation challenges
 :::
 ::::
 
 ## About Tidy Tuesdays
 
-Tidy Tuesday is a weekly data project in R organized by the R for Data Science online community. Each week, a new dataset is posted alongside a chart or article related to that dataset, and participants explore the data and create visualizations.
+Tidy Tuesday is a weekly data project in R organised by the R for Data Science online community. Each week, a new dataset is posted alongside a chart or article related to that dataset, and participants explore the data and create visualisations.
 
-This site showcases my journey through these weekly challenges, demonstrating various techniques in data wrangling, visualization, and analysis using R.
+This site showcases my journey through these weekly challenges, demonstrating various techniques in data wrangling, visualisation, and analysis using R.
 
 ## Recent Challenges
 
@@ -30,7 +30,7 @@ Exploring relationships between bill length, bill depth, and species in the Palm
 :::: {.g-col-4}
 ### [Week 2: Global Air Quality](/weekly_challenges/week2/)
 ![](/weekly_challenges/week2/thumbnail.png)
-Analyzing air quality measurements across major global cities.
+Analysing air quality measurements across major global cities.
 ::::
 
 :::: {.g-col-4}
@@ -49,7 +49,7 @@ Interested in participating in Tidy Tuesday yourself? Here's how to get started:
 
 1. Fork the [TidyTuesday GitHub repository](https://github.com/rfordatascience/tidytuesday)
 2. Check the repository for the latest dataset each Tuesday
-3. Analyze the data and create visualizations using R
+3. Analyse the data and create visualisations using R
 4. Share your work using the #TidyTuesday hashtag on social media
 
 ## Tools and Techniques
@@ -57,11 +57,11 @@ Interested in participating in Tidy Tuesday yourself? Here's how to get started:
 Throughout these challenges, I use a variety of R packages and techniques:
 
 - **tidyverse** - For data manipulation and transformation
-- **ggplot2** - For static visualizations
+- **ggplot2** - For static visualisations
 - **shiny** - For interactive applications
 - **plotly** - For interactive plots
 - **sf** & **tmap** - For spatial data and mapping
-- **text mining** - For analyzing textual data
+- **text mining** - For analysing textual data
 - **machine learning** - For predictive modeling
 
-Each week's challenge explores different aspects of data science, from exploratory data analysis to advanced visualization techniques.
+Each week's challenge explores different aspects of data science, from exploratory data analysis to advanced visualisation techniques.

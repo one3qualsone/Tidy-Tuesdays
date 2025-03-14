@@ -1,6 +1,6 @@
 ---
 title: "Week 4: X-Men Comic Appearances"
-description: "Analyzing the popularity of X-Men characters across decades (1963-1992)"
+description: "Analysing the popularity of X-Men characters across decades (1963-1992)"
 date: "2025-03-25"
 categories: [comics, pop culture, time series]
 image: "thumbnail.png"
@@ -55,7 +55,7 @@ head(mutant_moneyball[, 1:7]) %>%  # Only showing first 7 columns for clarity
 
 ## Data Preparation
 
-The character names in the dataset use CamelCase format (e.g., "ProfessorX"). Let's create a function to format these names for better readability in our visualizations:
+The character names in the dataset use CamelCase format (e.g., "ProfessorX"). Let's create a function to format these names for better readability in our visualisations:
 
 ```{r}
 # Function to format names
@@ -93,9 +93,9 @@ mutant_moneyball_TI %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
 ```
 
-## Visualizing Total Appearances
+## Visualising Total Appearances
 
-Now, let's create a visualization showing the total comic appearances for each X-Men character:
+Now, let's create a visualisation showing the total comic appearances for each X-Men character:
 
 ```{r fig.height=8, fig.width=10}
 # Create plot of total issues per member
@@ -127,11 +127,11 @@ p1 <- ggplot(mutant_moneyball_TI, aes(x = Member, y = TotalIssues, fill = TotalI
 p1
 ```
 
-The visualization clearly shows that certain characters like Professor X, Cyclops, and Storm have significantly more appearances than others, reflecting their importance as core team members.
+The visualisation clearly shows that certain characters like Professor X, Cyclops, and Storm have significantly more appearances than others, reflecting their importance as core team members.
 
 ## Appearances Over Time
 
-Next, let's analyze how the appearances of the most popular X-Men characters changed over the decades from the 1960s to the 1990s:
+Next, let's analyse how the appearances of the most popular X-Men characters changed over the decades from the 1960s to the 1990s:
 
 ```{r fig.height=10, fig.width=12}
 # Look at the appearances of the most popular members over time
@@ -180,7 +180,7 @@ p2
 
 ## Character Appearances by Decade
 
-To better understand how the X-Men roster evolved over time, let's analyze the distribution of appearances across decades:
+To better understand how the X-Men roster evolved over time, let's analyse the distribution of appearances across decades:
 
 ```{r}
 # Calculate the percentage of appearances in each decade
@@ -210,9 +210,9 @@ decade_summary %>%
   row_spec(1:3, background = "#FFF8DC")
 ```
 
-## Combined Visualization
+## Combined Visualisation
 
-Finally, let's combine our visualizations to create a comprehensive view of X-Men character appearances:
+Finally, let's combine our visualisations to create a comprehensive view of X-Men character appearances:
 
 ```{r fig.height=18, fig.width=12}
 # Combine the two plots
@@ -238,7 +238,7 @@ From our analysis of the X-Men comic book appearances from 1963 to 1992, we can 
 
 ## Conclusion
 
-This analysis provides insights into the evolution of the X-Men team over three critical decades of their publication history. The visualization techniques used here could be applied to other media franchises to track character popularity and narrative focus over time.
+This analysis provides insights into the evolution of the X-Men team over three critical decades of their publication history. The visualisation techniques used here could be applied to other media franchises to track character popularity and narrative focus over time.
 
 The clear generational shifts visible in the data reflect not only the evolving storylines within the X-Men universe but also changing editorial directions and reader preferences. Characters who maintained high appearance rates across multiple decades can be seen as the backbone of the franchise, while those with more concentrated appearances might represent specific eras or storytelling approaches.
 

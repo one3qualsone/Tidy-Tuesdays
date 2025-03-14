@@ -45,7 +45,7 @@ The dataset includes several key measurements:
 - Flipper length (mm)
 - Body mass (g)
 
-## Visualizing Penguin Bill Dimensions
+## Visualising Penguin Bill Dimensions
 
 Let's create a scatter plot showing the relationship between bill length and bill depth, colored by species:
 
@@ -59,9 +59,9 @@ ggplot(df, aes(x = `Bill Length (mm)`, y = `Bill Depth (mm)`, color = Species)) 
   theme(legend.position = "bottom")
 ```
 
-## Enhanced Visualization
+## Enhanced Visualisation
 
-Here's an enhanced version with trend lines to better visualize the relationship:
+Here's an enhanced version with trend lines to better visualise the relationship:
 
 ```{r}
 ggplot(df, aes(x = `Bill Length (mm)`, y = `Bill Depth (mm)`, color = Species)) +
@@ -92,7 +92,7 @@ species_by_island %>%
 
 ## Conclusion
 
-This exploration demonstrates how simple visualizations can reveal clear patterns in biological data. The distinct clustering of penguin species based on bill dimensions shows how these measurements can be used for species identification.
+This exploration demonstrates how simple visualisations can reveal clear patterns in biological data. The distinct clustering of penguin species based on bill dimensions shows how these measurements can be used for species identification.
 
 ## Resources
 
