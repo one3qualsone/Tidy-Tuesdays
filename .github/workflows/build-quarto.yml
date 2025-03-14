@@ -1,0 +1,43 @@
+name: Build Quarto Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: rocker/verse:4.2.0
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install system dependencies
+        run: |
+          apt-get update && apt-get install -y \
+          curl \
+          gdebi-core
+
+      - name: Install Quarto
+        run: |
+          curl -s https://download1.rstudio.org/electron/focal/amd64/quarto-1.3.450-linux-amd64.deb -o quarto.deb \
+          && gdebi -n quarto.deb \
+          && rm quarto.deb
+      
+      - name: Install R packages
+        run: |
+          R -e "install.packages(c('rmarkdown', 'knitr', 'dplyr', 'ggplot2', 'tidyverse', 'shiny', 'bslib', 'ggExtra', 'lubridate', 'plotly', 'maps', 'viridis', 'patchwork'), repos = 'https://cloud.r-project.org/')"
+      
+      - name: Build Quarto site
+        run: |
+          cd website
+          quarto render
+      
+      - name: Upload built site
+        uses: actions/upload-artifact@v3
+        with:
+          name: quarto-site
+          path: website/_site/
