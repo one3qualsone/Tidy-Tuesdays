@@ -10,7 +10,7 @@ Each week, a new dataset is analyzed and visualized, exploring different visuali
 
 The website is built using [Quarto](https://quarto.org/) and deployed to Netlify. Visit the live site at:
 
-[https://tidy-tuesdays.netlify.app/](https://tidy-tuesdays.netlify.app/)
+https://tidytuesdays.oneequalsone.uk/
 
 ## Repository Structure
 
