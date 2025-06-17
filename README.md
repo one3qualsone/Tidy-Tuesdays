@@ -1,10 +1,10 @@
 # Tidy Tuesdays
 
-This repository hosts a collection of [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) weekly data visualization challenges, showcasing data analysis and visualization techniques using R.
+This repository hosts a collection of [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) weekly data visualisation challenges, showcasing data analysis and visualisation techniques using R.
 
 ## Overview
 
-Each week, a new dataset is analyzed and visualized, exploring different visualization techniques, statistical methods, and storytelling approaches. This project serves as a portfolio of data visualization work and a learning journey through R's data science ecosystem.
+Each week, a new dataset is analysed and visualised, exploring different visualisation techniques, statistical methods, and storytelling approaches. This project serves as a portfolio of data visualisation work and a learning journey through R's data science ecosystem.
 
 ## Website
 
@@ -15,7 +15,7 @@ https://tidytuesdays.oneequalsone.uk/
 ## Repository Structure
 
 - `website/`: Contains the Quarto website files
-  - `weekly_challenges/`: Weekly analyses organized by week
+  - `weekly_challenges/`: Weekly analyses organised by week
   - `resources/`: CSS, images, and other static resources
 - `.github/workflows/`: CI/CD pipeline configuration
 - `netlify.toml`: Configuration for Netlify deployment
